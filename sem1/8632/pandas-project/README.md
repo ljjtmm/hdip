@@ -7,7 +7,7 @@
 <p>The <em>Iris</em> dataset, otherwise known as <bf>Fisher's</bf> <em>Iris</em> dataset is a multivariate data set used and made famous by the British statistician and biologist Ronald Fisher in his 1936 paper
 <em>The use of multiple meausurements in taxonomic problems</em> as an example of linear discriminant analysis. </p>
 
-<h1>The Dataset</em>
+<h1>The Dataset</h1>
 The dataset contains measurements of four features of iris flowers:
 <ul>
     <li>Sepal length</li>
