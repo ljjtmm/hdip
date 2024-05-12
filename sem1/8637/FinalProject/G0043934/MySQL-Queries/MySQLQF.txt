@@ -1,0 +1,24 @@
+SELECT
+	p.personId,
+	p.personname,
+	c.Name AS CityName
+FROM 
+	person p
+JOIN
+	hasvisitedcity vc ON p.personId = vc.personID
+JOIN
+	city c ON c.ID = vc.cityID
+JOIN
+	country co ON co.Code = c.CountryCode
+WHERE
+	c.Population > (
+		SELECT 
+			SUM(c2.Population)
+		FROM 
+			country c2
+		WHERE 
+			c2.Region = 'Micronesia'
+	)
+ORDER BY
+	p.personId ASC,
+	c.Name ASC;

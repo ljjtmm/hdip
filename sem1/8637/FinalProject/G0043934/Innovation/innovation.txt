@@ -1,0 +1,8 @@
+1. Used Pandas to convert the output from MySQL connection into a DataFrame, and then convert that output into the desired formats for part 1 and 2 of the MySQL questions.
+
+2. A neat breakdown of files, containing:
+	script.py		Main file, which generates the menu
+	menuoptions.py		Contains menu logic
+	dbconnections.py	Connects to and Queries the DBs
+
+

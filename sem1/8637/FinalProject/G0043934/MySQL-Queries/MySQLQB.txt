@@ -1,0 +1,17 @@
+SELECT
+	p.personId,
+	CASE
+		WHEN p.personname LIKE '%,%' THEN
+			TRIM(CONCAT(SUBSTRING_INDEX(p.personname, ',', -1), ' ', SUBSTRING_INDEX(p.personname, ',', 1)))
+		ELSE
+			p.personname
+	END AS personname,
+	c.Name AS Name
+FROM
+	person p
+JOIN
+	city ct ON p.city = ct.ID
+JOIN
+	country c ON ct.CountryCode = c.Code
+ORDER BY
+	p.personId asc;

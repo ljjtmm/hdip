@@ -1,0 +1,4 @@
+MATCH (e:Employee)
+OPTIONAL MATCH (e)-[:MEMBER_OF]->(t:Team)
+RETURN e.eid AS EID, e.name AS Name, t.name AS Team
+ORDER BY EID;

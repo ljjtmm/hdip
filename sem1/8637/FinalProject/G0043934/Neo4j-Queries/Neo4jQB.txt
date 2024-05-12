@@ -1,0 +1,4 @@
+MATCH (d:Department)
+WITH max(d.budget) AS maxBudget
+MATCH (d:Department{budget: maxBudget})<-[:OVERSEES]-(p:Project)<-[:WORKS_ON]-(e:Employee)
+RETURN sum(e.salary) AS TotalSalary

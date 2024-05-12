@@ -1,0 +1,4 @@
+MATCH (e:Employee)-[:MEMBER_OF]->(t:Team)-[:WORKS_ON]->(p:Project)<-[:OVERSEES]-(d:Department)<-[:IN_CHARGE_OF]-(m:Manager{name:"Matthew Quinn"})
+WHERE e.role = "Engineer"
+RETURN DISTINCT e.eid AS EID, e.name AS Name
+ORDER BY e.eid

@@ -1,0 +1,18 @@
+SELECT
+	p.personId,
+	p.personname,
+	CASE
+		WHEN ct.Population > 0 AND ct.Population < 50000 THEN "Small City"
+		WHEN ct.Population > 50000  AND ct.Population < 100000 THEN "Big City"
+		WHEN ct.Population > 100000 AND ct.Population < 200000 THEN "Large City"
+		WHEN ct.Population > 200000 AND ct.Population < 500000 THEN "Huge City"
+		WHEN ct.Population > 500000 THEN "Mega City"
+	END AS City
+FROM
+	person p
+JOIN
+	city ct ON p.city = ct.ID
+JOIN
+	country c ON ct.CountryCode = c.Code
+ORDER BY
+	p.personId asc;

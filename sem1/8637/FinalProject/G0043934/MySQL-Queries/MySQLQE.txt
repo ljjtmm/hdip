@@ -1,0 +1,19 @@
+SELECT
+	p.personId,
+	p.personname,
+	c.Name,
+	CASE
+		WHEN DATEDIFF(vc.dateLeft, vc.dateArrived) < 365 THEN '< 1 Year'
+		WHEN DATEDIFF(vc.dateLeft, vc.dateArrived) >= 365 AND DATEDIFF(vc.dateLeft, vc.dateArrived) < 730 THEN '< 2 Years'
+		WHEN DATEDIFF(vc.dateLeft, vc.dateArrived) >= 730 AND DATEDIFF(vc.dateLeft, vc.dateArrived) < 1825 THEN '< 3 Years'
+		WHEN DATEDIFF(vc.dateLeft, vc.dateArrived) >= 1825 THEN '> 3 Years'
+	END AS VisitDuration
+FROM 
+	person p
+JOIN
+	hasvisitedcity vc ON p.personId = vc.personID
+JOIN
+	city c ON c.ID = vc.cityID
+ORDER BY
+	c.Name ASC,
+	p.personId ASC;

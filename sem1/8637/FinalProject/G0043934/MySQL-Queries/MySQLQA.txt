@@ -1,0 +1,18 @@
+SELECT 
+	c.Name,
+	CASE 
+        WHEN cl.IsOfficial = 'T' THEN 'Yes' 
+        WHEN cl.IsOfficial = 'F' THEN 'No'
+	ELSE 'Unknown' 
+	END AS Official, 
+	SUM(cl.Percentage) AS Percentage
+FROM 
+	country c
+JOIN 
+	countrylanguage cl ON c.Code = cl.CountryCode
+WHERE 
+	c.Region LIKE '%Europe'
+GROUP BY 
+	c.Name, Official
+ORDER BY
+	c.Name, Official;

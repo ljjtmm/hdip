@@ -1,0 +1,23 @@
+SELECT
+    c.Continent,
+    c.Name,
+    c.GNP
+FROM
+    country c
+JOIN (
+    SELECT
+        Continent,
+        MAX(GNP) AS MaxGNP
+    FROM
+        country
+    WHERE
+        GNP != 0
+    GROUP BY
+        Continent
+) AS max_gnp_per_continent ON c.Continent = max_gnp_per_continent.Continent AND c.GNP = max_gnp_per_continent.MaxGNP
+WHERE
+    c.GNP != 0
+ORDER BY
+    c.GNP DESC,
+    c.Continent ASC,
+    c.Name ASC;

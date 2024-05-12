@@ -1,0 +1,4 @@
+MATCH (manager:Manager{eid:"E15"})-[:MANAGES]->(project)<-[:WORKS_ON]-(employee:Employee)
+WITH manager, employee
+ORDER BY employee.eid
+RETURN manager.name AS Name, COLLECT(employee.eid) AS Employees
