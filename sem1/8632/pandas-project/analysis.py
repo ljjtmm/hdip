@@ -4,7 +4,6 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
 def summarise_variables(data, output_file_name):
     """
     Summarise each variable in the dataset, and write to an output file.
