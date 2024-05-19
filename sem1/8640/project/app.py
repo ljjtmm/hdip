@@ -37,3 +37,9 @@ def init_db():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# REST API endpoint to get all items
+@app.route('/api/items', methods=['GET'])
+def get_items():
+    items = Item.query.all()  # Query all items from the database
+    return jsonify([item.to_dict() for item in items])  # Convert items to dictionary format and return as JSON
