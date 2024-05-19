@@ -22,3 +22,8 @@
     <li>Test PUT to verify we are able to Update items: curl -X PUT -H "Content-Type: application/json" -d '{"name":"New Name", "description":"New Description"}' http://127.0.0.1:5000/api/items/1</li>
     <li>Test DELETE to verify we are able to Delete items: curl -X DELETE http://127.0.0.1:5000/api/items/1 </li>
 </ol>
+
+<h2>Room for improvement (aka "What I'd do if I had more time outside work/life commitments")</h2>
+<ol>
+    <li>Improve UI to show a table containing the data points, updating in real time.</li>
+</ol>
