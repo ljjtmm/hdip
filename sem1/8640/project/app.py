@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -41,5 +41,27 @@ def index():
 # REST API endpoint to get all items
 @app.route('/api/items', methods=['GET'])
 def get_items():
-    items = Item.query.all()  # Query all items from the database
-    return jsonify([item.to_dict() for item in items])  # Convert items to dictionary format and return as JSON
+    items = Item.query.all()  
+    return jsonify([item.to_dict() for item in items])  
+
+# REST API endpoint to create a new item
+@app.route('/api/items', methods=['POST'])
+def create_item():
+    data = request.get_json()  
+    new_item = Item(name=data['name'], description=data['description'])  
+    db.session.add(new_item) 
+    db.session.commit()  
+    return jsonify(new_item.to_dict()), 201
+
+# REST API endpoint to update an existing item
+@app.route('/api/items/<int:id>', methods=['PUT'])
+def update_item(id):
+    data = request.get_json()  
+    # Query the item by ID or return 404 if not found
+    item = Item.query.get_or_404(id)  
+    item.name = data['name']  
+    item.description = data['description']  
+    db.session.commit()  
+    return jsonify(item.to_dict())
+
+
