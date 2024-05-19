@@ -64,4 +64,15 @@ def update_item(id):
     db.session.commit()  
     return jsonify(item.to_dict())
 
+# REST API endpoint to delete an item
+@app.route('/api/items/<int:id>', methods=['DELETE'])
+def delete_item(id):
+    item = Item.query.get_or_404(id)
+    db.session.delete(item)
+    db.session.commit() 
+    # Return an empty response with a 204 status code
+    return '', 204 
 
+# Run the application in debug mode
+if __name__ == '__main__':
+    app.run(debug=True)
