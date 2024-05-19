@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'you-will-never-guess
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize the SQLAlchemy database instance with the Flask app
+# Initialise the SQLAlchemy database instance with the Flask app
 db = SQLAlchemy(app)
 
 # Define the database model for the Item
@@ -26,16 +26,14 @@ class Item(db.Model):
             'name': self.name,
             'description': self.description
         }
-    
-# This function runs before the first request to ensure that the database tables are created
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
-# Add a route for testing
+# Custom CLI command to create database tables
+@app.cli.command('init-db')
+def init_db():
+    db.create_all()
+    print('Database initialised.')
+
+# Route to serve the main web interface
 @app.route('/')
 def index():
-    return "Is this thing on?"
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return render_template('index.html')

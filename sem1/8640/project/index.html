@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask CRUD</title>
+</head>
+<body>
+    <h1>Items</h1>
+    <ul id="items"></ul>
+    <form id="item-form">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="description" placeholder="Description">
+        <button type="submit">Add Item</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
