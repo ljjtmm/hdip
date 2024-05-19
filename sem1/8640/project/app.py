@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -26,3 +26,16 @@ class Item(db.Model):
             'name': self.name,
             'description': self.description
         }
+    
+# This function runs before the first request to ensure that the database tables are created
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+# Add a route for testing
+@app.route('/')
+def index():
+    return "Is this thing on?"
+
+if __name__ == '__main__':
+    app.run(debug=True)
